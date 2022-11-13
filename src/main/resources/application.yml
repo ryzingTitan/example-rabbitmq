@@ -1,0 +1,121 @@
+spring:
+  profiles:
+    active: production
+  application:
+    name: example-rabbitmq
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  server:
+    port: 8081
+
+---
+spring:
+  config:
+    activate:
+      on-profile: production
+  rabbitmq:
+    host: localhost
+    port: 5672
+    virtual-host: example-rabbitmq
+    username: guest
+    password: guest
+    listener:
+      type: simple
+      simple:
+        concurrency: 1
+        max-concurrency: 5
+        prefetch: 50
+        retry:
+          enabled: true
+          initial-interval: 1000ms
+          max-attempts: 3
+          max-interval: 10000ms
+          multiplier: 1
+    template:
+      retry:
+        enabled: true
+        initial-interval: 1000ms
+        max-attempts: 3
+        max-interval: 10000ms
+        multiplier: 1
+    publisher-confirm-type: simple
+
+k8s:
+  podName: ${POD_NAME}
+  nodeName: ${NODE_NAME}
+
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+  rabbitmq:
+    host: localhost
+    port: 5672
+    virtual-host: example-rabbitmq
+    username: guest
+    password: guest
+    listener:
+      type: simple
+      simple:
+        concurrency: 1
+        max-concurrency: 5
+        prefetch: 50
+        retry:
+          enabled: true
+          initial-interval: 1000ms
+          max-attempts: 3
+          max-interval: 10000ms
+          multiplier: 1
+    template:
+      retry:
+        enabled: true
+        initial-interval: 1000ms
+        max-attempts: 3
+        max-interval: 10000ms
+        multiplier: 1
+    publisher-confirm-type: simple
+
+k8s:
+  podName: 'test-pod-name'
+  nodeName: 'test-node-name'
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+  rabbitmq:
+    host: localhost
+    port: 5672
+    virtual-host: example-rabbitmq
+    username: guest
+    password: guest
+    listener:
+      type: simple
+      simple:
+        concurrency: 1
+        max-concurrency: 5
+        prefetch: 50
+        retry:
+          enabled: true
+          initial-interval: 1000ms
+          max-attempts: 3
+          max-interval: 10000ms
+          multiplier: 1
+    template:
+      retry:
+        enabled: true
+        initial-interval: 1000ms
+        max-attempts: 3
+        max-interval: 10000ms
+        multiplier: 1
+    publisher-confirm-type: simple
+
+k8s:
+  podName: 'test-pod-name'
+  nodeName: 'test-node-name'
