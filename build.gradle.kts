@@ -6,11 +6,11 @@ import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 plugins {
     id("org.springframework.boot") version "2.7.5"
     id("io.spring.dependency-management") version "1.1.0"
-    kotlin("jvm") version "1.7.20"
-    kotlin("plugin.spring") version "1.7.20"
+    kotlin("jvm") version "1.7.21"
+    kotlin("plugin.spring") version "1.7.21"
     id("org.jlleitschuh.gradle.ktlint") version "11.0.0"
     id("io.gitlab.arturbosch.detekt") version "1.21.0"
-    id("com.github.ben-manes.versions") version "0.43.0"
+    id("com.github.ben-manes.versions") version "0.44.0"
     jacoco
 }
 
@@ -31,7 +31,7 @@ repositories {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-amqp")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.14.0")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("net.logstash.logback:logstash-logback-encoder:7.2")
@@ -40,9 +40,9 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.junit.platform:junit-platform-suite-api:1.9.1")
     testImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
-    testImplementation("io.cucumber:cucumber-java:7.8.1")
-    testImplementation("io.cucumber:cucumber-junit-platform-engine:7.8.1")
-    testImplementation("io.cucumber:cucumber-spring:7.8.1")
+    testImplementation("io.cucumber:cucumber-java:7.9.0")
+    testImplementation("io.cucumber:cucumber-junit-platform-engine:7.9.0")
+    testImplementation("io.cucumber:cucumber-spring:7.9.0")
     testImplementation("com.github.fridujo:rabbitmq-mock:1.2.0")
     testImplementation("org.awaitility:awaitility-kotlin:4.2.0")
 }
