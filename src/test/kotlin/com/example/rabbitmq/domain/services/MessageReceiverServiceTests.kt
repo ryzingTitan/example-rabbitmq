@@ -31,7 +31,7 @@ class MessageReceiverServiceTests {
             verify(mockLoggingService, times(1)).info(
                 any(),
                 eq(messageUuid),
-                eq("Received message with UUID $messageUuid")
+                eq("Received message with UUID $messageUuid"),
             )
             verify(mockMessageSenderService, times(1)).send(refEq(expectedSentMessage))
             verify(mockLoggingService, never()).error(any(), any(), any(), any())
@@ -49,14 +49,14 @@ class MessageReceiverServiceTests {
             verify(mockLoggingService, times(1)).info(
                 any(),
                 eq(messageUuid),
-                eq("Received message with UUID $messageUuid")
+                eq("Received message with UUID $messageUuid"),
             )
             verify(mockMessageSenderService, never()).send(any())
             verify(mockLoggingService, times(1)).error(
                 any(),
                 eq(messageUuid),
                 eq("Message failed to process"),
-                eq(expectedException)
+                eq(expectedException),
             )
         }
     }
@@ -68,10 +68,10 @@ class MessageReceiverServiceTests {
     private val messageUuid = UUID.fromString("209c8fd8-6b52-4186-8e3b-5abf750f6fb2")
     private val expectedSentMessage = RabbitMqMessage(
         data = "Sent Message",
-        uuid = messageUuid
+        uuid = messageUuid,
     )
     private val testMessage = RabbitMqMessage(
         data = "Test Message",
-        uuid = messageUuid
+        uuid = messageUuid,
     )
 }

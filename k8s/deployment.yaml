@@ -5,7 +5,7 @@ metadata:
 spec:
   replicas: 1
   revisionHistoryLimit: 10
-  minReadySeconds: 30
+  minReadySeconds: 15
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -30,7 +30,7 @@ spec:
             httpGet:
               port: 8081
               path: /actuator/health
-            initialDelaySeconds: 30
+            initialDelaySeconds: 15
             periodSeconds: 5
             timeoutSeconds: 2
             failureThreshold: 2
@@ -38,7 +38,7 @@ spec:
             httpGet:
               port: 8081
               path: /actuator/health
-            initialDelaySeconds: 60
+            initialDelaySeconds: 30
             periodSeconds: 10
             timeoutSeconds: 2
             failureThreshold: 1
@@ -53,6 +53,9 @@ spec:
                   fieldPath: spec.nodeName
           resources:
             limits:
+              cpu: 500m
+              memory: 250Mi
+            requests:
               cpu: 500m
               memory: 250Mi
           imagePullPolicy: Always
