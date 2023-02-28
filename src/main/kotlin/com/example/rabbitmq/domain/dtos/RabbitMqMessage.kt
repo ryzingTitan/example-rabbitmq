@@ -6,5 +6,5 @@ import java.util.UUID
 @Generated
 data class RabbitMqMessage(
     val data: String = "",
-    val uuid: UUID = UUID.randomUUID()
+    val uuid: UUID = UUID.randomUUID(),
 )

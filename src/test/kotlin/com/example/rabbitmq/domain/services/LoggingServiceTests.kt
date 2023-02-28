@@ -40,7 +40,7 @@ class LoggingServiceTests {
             assertEquals(Level.INFO, appender.list[0].level)
             assertEquals("test message", appender.list[0].message)
             assertEquals(logger.name, appender.list[0].loggerName)
-            assertEquals(EXPECTED_MARKERS, appender.list[0].marker.toString())
+            assertEquals(EXPECTED_MARKERS.toString(), appender.list[0].markerList.toString())
         }
     }
 
@@ -56,7 +56,7 @@ class LoggingServiceTests {
             assertEquals(Level.ERROR, appender.list[0].level)
             assertEquals("test message", appender.list[0].message)
             assertEquals(logger.name, appender.list[0].loggerName)
-            assertEquals(EXPECTED_MARKERS, appender.list[0].marker.toString())
+            assertEquals(EXPECTED_MARKERS.toString(), appender.list[0].markerList.toString())
             assertEquals(exception.message, appender.list[0].throwableProxy.message)
             assertEquals(exception.javaClass.name, appender.list[0].throwableProxy.className)
         }
@@ -71,7 +71,11 @@ class LoggingServiceTests {
     private val uniqueIdentifier = UUID.fromString("e48d8c01-8f8b-40b8-b0e3-ffd3d13f562a")
 
     companion object LoggingServiceTestConstants {
-        private const val EXPECTED_MARKERS = "uniqueIdentifier=e48d8c01-8f8b-40b8-b0e3-ffd3d13f562a, " +
-            "applicationName=testApp, podName=testPod, nodeName=testNode"
+        private val EXPECTED_MARKERS = listOf(
+            "uniqueIdentifier=e48d8c01-8f8b-40b8-b0e3-ffd3d13f562a",
+            "applicationName=testApp",
+            "podName=testPod",
+            "nodeName=testNode",
+        )
     }
 }

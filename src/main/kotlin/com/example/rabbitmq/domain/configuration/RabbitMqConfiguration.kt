@@ -19,8 +19,8 @@ class RabbitMqConfiguration {
                 .configure(KotlinFeature.NullIsSameAsDefault, false)
                 .configure(KotlinFeature.SingletonSupport, false)
                 .configure(KotlinFeature.StrictNullChecks, false)
-                .build()
-        )
+                .build(),
+        ),
     )
 
     companion object RabbitMqConfigurationConstants {

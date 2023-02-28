@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service
 @Service
 class MessageSenderService(
     private val loggingService: LoggingService,
-    private val rabbitTemplate: RabbitTemplate
+    private val rabbitTemplate: RabbitTemplate,
 ) {
     private val logger = LoggerFactory.getLogger(MessageSenderService::class.java)
 

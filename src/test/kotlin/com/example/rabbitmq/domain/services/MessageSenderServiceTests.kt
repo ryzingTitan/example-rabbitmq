@@ -32,7 +32,7 @@ class MessageSenderServiceTests {
             verify(mockLoggingService, times(1)).info(
                 any(),
                 eq(testMessage.uuid),
-                eq("Sending message with UUID ${testMessage.uuid}")
+                eq("Sending message with UUID ${testMessage.uuid}"),
             )
             verify(mockRabbitTemplate, times(1)).invoke(any<RabbitOperations.OperationsCallback<RabbitTemplate>>())
             verify(mockLoggingService, never()).error(any(), any(), any(), any())
@@ -50,14 +50,14 @@ class MessageSenderServiceTests {
             verify(mockLoggingService, times(1)).info(
                 any(),
                 eq(testMessage.uuid),
-                eq("Sending message with UUID ${testMessage.uuid}")
+                eq("Sending message with UUID ${testMessage.uuid}"),
             )
             verify(mockRabbitTemplate, never()).invoke(any<RabbitOperations.OperationsCallback<RabbitTemplate>>())
             verify(mockLoggingService, times(1)).error(
                 any(),
                 eq(testMessage.uuid),
                 eq("Message failed to send"),
-                eq(expectedException)
+                eq(expectedException),
             )
         }
     }
@@ -68,6 +68,6 @@ class MessageSenderServiceTests {
     private val mockRabbitTemplate = mock<RabbitTemplate>()
     private val testMessage = RabbitMqMessage(
         data = "test message",
-        uuid = UUID.fromString("8a26b6fa-b30e-41db-886f-4e6d0865af65")
+        uuid = UUID.fromString("8a26b6fa-b30e-41db-886f-4e6d0865af65"),
     )
 }

@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit
 
 class ReceiveAndSendMessageStepDefs(
     private val rabbitTemplate: RabbitTemplate,
-    private val rabbitAdmin: RabbitAdmin
+    private val rabbitAdmin: RabbitAdmin,
 ) {
     @Given("the following messages exist in the queue")
     fun theFollowingMessagesExistInTheQueue(table: DataTable) {
@@ -62,7 +62,7 @@ class ReceiveAndSendMessageStepDefs(
     fun mapRabbitMqMessage(tableRow: Map<String, String>): RabbitMqMessage {
         return RabbitMqMessage(
             data = tableRow["data"].toString(),
-            uuid = UUID.fromString(tableRow["uuid"])
+            uuid = UUID.fromString(tableRow["uuid"]),
         )
     }
 

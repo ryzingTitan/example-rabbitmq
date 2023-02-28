@@ -12,7 +12,7 @@ import java.util.UUID
 @Service
 class LoggingService(
     private val k8sProperties: K8sProperties,
-    private val springApplicationProperties: SpringApplicationProperties
+    private val springApplicationProperties: SpringApplicationProperties,
 ) {
     fun info(logger: Logger, uniqueIdentifier: UUID, message: String) {
         logger.info(
@@ -20,7 +20,7 @@ class LoggingService(
                 .and<LogstashMarker>(Markers.append("applicationName", springApplicationProperties.name))
                 .and<LogstashMarker>(Markers.append("podName", k8sProperties.podName))
                 .and(Markers.append("nodeName", k8sProperties.nodeName)),
-            message
+            message,
         )
     }
 
@@ -31,7 +31,7 @@ class LoggingService(
                 .and<LogstashMarker>(Markers.append("podName", k8sProperties.podName))
                 .and(Markers.append("nodeName", k8sProperties.nodeName)),
             message,
-            exception
+            exception,
         )
     }
 }
