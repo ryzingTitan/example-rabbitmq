@@ -3,7 +3,7 @@ FROM gradle:7.6-jdk17-alpine as build
 # build project within temporary Docker image
 COPY --chown=gradle:gradle . /home/gradle/src
 WORKDIR /home/gradle/src
-RUN gradle bootJar -info
+RUN gradle bootJar -info -x addKtlintFormatGitPreCommitHook
 
 # build final Docker image using output from build image above
 FROM eclipse-temurin:17-jre-jammy
