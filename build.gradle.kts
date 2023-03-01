@@ -11,6 +11,7 @@ plugins {
     id("org.jlleitschuh.gradle.ktlint") version "11.2.0"
     id("io.gitlab.arturbosch.detekt") version "1.22.0"
     id("com.github.ben-manes.versions") version "0.46.0"
+    id("org.graalvm.buildtools.native") version "0.9.20"
     jacoco
 }
 
@@ -65,6 +66,7 @@ tasks.getByName("addKtlintFormatGitPreCommitHook") {
     dependsOn("ktlintMainSourceSetCheck")
     dependsOn("ktlintTestSourceSetCheck")
     dependsOn("ktlintKotlinScriptCheck")
+    dependsOn("collectReachabilityMetadata")
     dependsOn("detekt")
 }
 
@@ -80,14 +82,6 @@ ktlint {
     reporters {
         reporter(ReporterType.JSON)
     }
-}
-
-detekt {
-    source = objects.fileCollection().from(
-        io.gitlab.arturbosch.detekt.extensions.DetektExtension.DEFAULT_SRC_DIR_KOTLIN,
-        io.gitlab.arturbosch.detekt.extensions.DetektExtension.DEFAULT_TEST_SRC_DIR_KOTLIN,
-    )
-    buildUponDefaultConfig = true
 }
 
 tasks.withType<Detekt>().configureEach {

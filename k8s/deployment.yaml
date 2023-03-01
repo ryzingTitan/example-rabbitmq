@@ -5,7 +5,6 @@ metadata:
 spec:
   replicas: 1
   revisionHistoryLimit: 10
-  minReadySeconds: 15
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -22,7 +21,7 @@ spec:
     spec:
       containers:
         - name: example-rabbitmq
-          image: example-rabbitmq
+          image: example-rabbitmq:1.0.0
           ports:
             - containerPort: 8080
               protocol: TCP
@@ -30,7 +29,7 @@ spec:
             httpGet:
               port: 8081
               path: /actuator/health
-            initialDelaySeconds: 15
+            initialDelaySeconds: 5
             periodSeconds: 5
             timeoutSeconds: 2
             failureThreshold: 2
@@ -38,7 +37,7 @@ spec:
             httpGet:
               port: 8081
               path: /actuator/health
-            initialDelaySeconds: 30
+            initialDelaySeconds: 10
             periodSeconds: 10
             timeoutSeconds: 2
             failureThreshold: 1
