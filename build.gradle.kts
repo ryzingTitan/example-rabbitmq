@@ -12,7 +12,7 @@ plugins {
     id("org.jlleitschuh.gradle.ktlint") version "11.3.2"
     id("io.gitlab.arturbosch.detekt") version "1.22.0"
     id("com.github.ben-manes.versions") version "0.46.0"
-    id("org.graalvm.buildtools.native") version "0.9.20"
+    id("org.graalvm.buildtools.native") version "0.9.22"
     jacoco
 }
 
@@ -65,8 +65,12 @@ tasks.getByName("addKtlintFormatGitPreCommitHook") {
     dependsOn("processResources")
     dependsOn("processTestResources")
     dependsOn("ktlintMainSourceSetCheck")
+    dependsOn("ktlintMainSourceSetFormat")
+    dependsOn("runKtlintFormatOverMainSourceSet")
     dependsOn("ktlintTestSourceSetCheck")
+    dependsOn("ktlintTestSourceSetFormat")
     dependsOn("ktlintKotlinScriptCheck")
+    dependsOn("ktlintKotlinScriptFormat")
     dependsOn("collectReachabilityMetadata")
     dependsOn("detekt")
 }
