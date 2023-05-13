@@ -2,13 +2,14 @@ import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 import io.gitlab.arturbosch.detekt.Detekt
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
+import java.util.*
 
 plugins {
-    id("org.springframework.boot") version "3.0.3"
+    id("org.springframework.boot") version "3.0.6"
     id("io.spring.dependency-management") version "1.1.0"
-    kotlin("jvm") version "1.8.10"
-    kotlin("plugin.spring") version "1.8.10"
-    id("org.jlleitschuh.gradle.ktlint") version "11.2.0"
+    kotlin("jvm") version "1.8.21"
+    kotlin("plugin.spring") version "1.8.21"
+    id("org.jlleitschuh.gradle.ktlint") version "11.3.2"
     id("io.gitlab.arturbosch.detekt") version "1.22.0"
     id("com.github.ben-manes.versions") version "0.46.0"
     id("org.graalvm.buildtools.native") version "0.9.20"
@@ -32,18 +33,18 @@ repositories {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-amqp")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.14.2")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.15.0")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("net.logstash.logback:logstash-logback-encoder:7.3")
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.junit.platform:junit-platform-suite-api:1.9.2")
+    testImplementation("org.junit.platform:junit-platform-suite-api:1.9.3")
     testImplementation("org.mockito.kotlin:mockito-kotlin:4.1.0")
-    testImplementation("io.cucumber:cucumber-java:7.11.1")
-    testImplementation("io.cucumber:cucumber-junit-platform-engine:7.11.1")
-    testImplementation("io.cucumber:cucumber-spring:7.11.1")
+    testImplementation("io.cucumber:cucumber-java:7.12.0")
+    testImplementation("io.cucumber:cucumber-junit-platform-engine:7.12.0")
+    testImplementation("io.cucumber:cucumber-spring:7.12.0")
     testImplementation("com.github.fridujo:rabbitmq-mock:1.2.0")
     testImplementation("org.awaitility:awaitility-kotlin:4.2.0")
 }
@@ -94,7 +95,7 @@ tasks.withType<Detekt>().configureEach {
 }
 
 jacoco {
-    toolVersion = "0.8.8"
+    toolVersion = "0.8.9"
 }
 
 tasks.jacocoTestReport {
@@ -139,7 +140,7 @@ tasks.withType<DependencyUpdatesTask> {
 }
 
 fun String.isNonStable(): Boolean {
-    val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { toUpperCase().contains(it) }
+    val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { uppercase(Locale.getDefault()).contains(it) }
     val regex = "^[0-9,.v-]+(-r)?$".toRegex()
     val isStable = stableKeyword || regex.matches(this)
     return isStable.not()
